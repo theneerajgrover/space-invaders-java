@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Space Invaders - A classic arcade game built with HTML5 Canvas, Spring Boot, and SQLite">
+    <title>Space Invaders</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ===== MAIN MENU SCREEN ===== -->
+    <div id="menu-screen" class="screen active">
+        <div class="starfield" id="menu-starfield"></div>
+        <div class="menu-content">
+            <h1 class="game-title">SPACE<br><span class="title-accent">INVADERS</span></h1>
+            <p class="subtitle">DEFEND EARTH FROM THE ALIEN INVASION</p>
+
+            <div class="name-input-group">
+                <label for="player-name-input">PILOT NAME</label>
+                <input type="text" id="player-name-input" maxlength="20" placeholder="Enter your name..." autocomplete="off">
+                <p id="name-error" class="error-text"></p>
+            </div>
+
+            <div class="menu-buttons">
+                <button id="start-btn" class="btn btn-primary">START GAME</button>
+                <button id="leaderboard-btn" class="btn btn-secondary">LEADERBOARD</button>
+            </div>
+
+            <div class="how-to-play">
+                <h2>HOW TO PLAY</h2>
+                <div class="controls-grid">
+                    <div class="control-item">
+                        <span class="key">←</span><span class="key">→</span>
+                        <span class="control-label">or</span>
+                        <span class="key">A</span><span class="key">D</span>
+                        <span class="control-label">Move Ship</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">SPACE</span>
+                        <span class="control-label">Shoot</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">P</span>
+                        <span class="control-label">Pause / Resume</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">R</span>
+                        <span class="control-label">Restart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== GAME SCREEN ===== -->
+    <div id="game-screen" class="screen">
+        <div class="game-hud">
+            <div class="hud-item">
+                <span class="hud-label">SCORE</span>
+                <span id="hud-score" class="hud-value">0</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">LIVES</span>
+                <span id="hud-lives" class="hud-value">♥♥♥</span>
+            </div>
+        </div>
+        <canvas id="game-canvas"></canvas>
+        <div id="pause-overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <h2>PAUSED</h2>
+                <p>Press <span class="key">P</span> to resume</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== GAME OVER SCREEN ===== -->
+    <div id="gameover-screen" class="screen">
+        <div class="starfield" id="gameover-starfield"></div>
+        <div class="overlay-content gameover-content">
+            <h2 id="gameover-title" class="gameover-title">GAME OVER</h2>
+            <div class="final-stats">
+                <div class="stat-item">
+                    <span class="stat-label">FINAL SCORE</span>
+                    <span id="final-score" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">ENEMIES DESTROYED</span>
+                    <span id="final-enemies" class="stat-value">0</span>
+                </div>
+            </div>
+            <div class="gameover-buttons">
+                <button id="save-score-btn" class="btn btn-primary">SAVE SCORE</button>
+                <span id="save-status" class="save-status"></span>
+                <button id="play-again-btn" class="btn btn-secondary">PLAY AGAIN</button>
+                <button id="menu-btn" class="btn btn-secondary">MAIN MENU</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== LEADERBOARD SCREEN ===== -->
+    <div id="leaderboard-screen" class="screen">
+        <div class="starfield" id="leaderboard-starfield"></div>
+        <div class="leaderboard-content">
+            <h2 class="leaderboard-title">LEADERBOARD</h2>
+            <div id="leaderboard-body">
+                <p id="leaderboard-loading" class="loading-text">Loading scores...</p>
+                <p id="leaderboard-empty" class="empty-text hidden">No scores yet. Play your first game!</p>
+                <p id="leaderboard-error" class="error-text hidden"></p>
+                <table id="leaderboard-table" class="leaderboard-table hidden">
+                    <thead>
+                        <tr>
+                            <th>RANK</th>
+                            <th>PILOT</th>
+                            <th>SCORE</th>
+                            <th>DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-tbody"></tbody>
+                </table>
+            </div>
+            <button id="leaderboard-back-btn" class="btn btn-secondary">BACK TO MENU</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
