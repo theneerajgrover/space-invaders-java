@@ -18,6 +18,8 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     /**
      * Handle bean validation errors (e.g. @NotBlank, @Min, @Max).
      * Returns 400 Bad Request with field-level error messages.
@@ -39,11 +41,37 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * Handle malformed or unreadable JSON bodies.
+     * Returns 400 Bad Request.
+     */
+    @ExceptionHandler(org.springframework.http.converter.HttpMessageNotReadableException.class)
+    public ResponseEntity<Map<String, Object>> handleNotReadable(org.springframework.http.converter.HttpMessageNotReadableException ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", HttpStatus.BAD_REQUEST.value());
+        response.put("timestamp", LocalDateTime.now().toString());
+        response.put("message", "Malformed or unreadable JSON request body");
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    /**
+     * Handle 404 static resource not found (e.g. favicon.ico) without logging as internal error.
+     */
+    @ExceptionHandler(org.springframework.web.servlet.resource.NoResourceFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleNoResourceFound(org.springframework.web.servlet.resource.NoResourceFoundException ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", HttpStatus.NOT_FOUND.value());
+        response.put("timestamp", LocalDateTime.now().toString());
+        response.put("message", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    /**
      * Handle any other unexpected exceptions.
      * Returns 500 Internal Server Error without leaking details.
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
+        logger.error("Unhandled exception: ", ex);
         Map<String, Object> response = new HashMap<>();
         response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.put("timestamp", LocalDateTime.now().toString());
