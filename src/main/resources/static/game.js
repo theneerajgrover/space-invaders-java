@@ -36,6 +36,29 @@ const leaderboardBackBtn = document.getElementById('leaderboard-back-btn');
 
 // ===== API Base URL =====
 const API_BASE = '/api/scores';
+const isGitHubPages = window.location.hostname.endsWith('github.io');
+
+// LocalStorage helpers for static hosting (e.g. GitHub Pages) where Java backend cannot execute
+function saveLocalScore(item) {
+    try {
+        const scores = JSON.parse(localStorage.getItem('space_invaders_scores') || '[]');
+        item.id = Date.now();
+        item.createdAt = new Date().toISOString();
+        scores.push(item);
+        scores.sort((a, b) => b.score - a.score || new Date(a.createdAt) - new Date(b.createdAt));
+        localStorage.setItem('space_invaders_scores', JSON.stringify(scores.slice(0, 10)));
+    } catch (e) {
+        console.warn('LocalStorage unavailable', e);
+    }
+}
+
+function getLocalLeaderboard() {
+    try {
+        return JSON.parse(localStorage.getItem('space_invaders_scores') || '[]');
+    } catch (e) {
+        return [];
+    }
+}
 
 // ===== Game Constants =====
 const CANVAS_WIDTH = 800;
@@ -588,6 +611,14 @@ async function saveScore() {
             saveScoreBtn.textContent = 'SAVE SCORE';
         }
     } catch (err) {
+        if (isGitHubPages) {
+            saveLocalScore(payload);
+            scoreSaved = true;
+            saveStatus.textContent = '✓ Score saved (Browser Storage)';
+            saveStatus.className = 'save-status success';
+            saveScoreBtn.textContent = 'SAVED';
+            return;
+        }
         saveStatus.textContent = '✗ Could not connect to server.';
         saveStatus.className = 'save-status error';
         saveScoreBtn.disabled = false;
@@ -596,6 +627,31 @@ async function saveScore() {
 }
 
 // ===== Leaderboard =====
+function renderLeaderboardRows(data) {
+    leaderboardTbody.innerHTML = '';
+    for (let i = 0; i < data.length; i++) {
+        const row = document.createElement('tr');
+        const rank = i + 1;
+        let rankClass = '';
+        if (rank === 1) rankClass = 'rank-gold';
+        else if (rank === 2) rankClass = 'rank-silver';
+        else if (rank === 3) rankClass = 'rank-bronze';
+
+        const dateStr = data[i].createdAt
+            ? new Date(data[i].createdAt).toLocaleDateString()
+            : '-';
+
+        row.innerHTML = `
+            <td class="${rankClass}">#${rank}</td>
+            <td>${escapeHtml(data[i].playerName)}</td>
+            <td>${data[i].score}</td>
+            <td>${dateStr}</td>
+        `;
+        leaderboardTbody.appendChild(row);
+    }
+    leaderboardTable.classList.remove('hidden');
+}
+
 async function loadLeaderboard() {
     leaderboardLoading.classList.remove('hidden');
     leaderboardEmpty.classList.add('hidden');
@@ -617,29 +673,18 @@ async function loadLeaderboard() {
             return;
         }
 
-        for (let i = 0; i < data.length; i++) {
-            const row = document.createElement('tr');
-            const rank = i + 1;
-            let rankClass = '';
-            if (rank === 1) rankClass = 'rank-gold';
-            else if (rank === 2) rankClass = 'rank-silver';
-            else if (rank === 3) rankClass = 'rank-bronze';
-
-            const dateStr = data[i].createdAt
-                ? new Date(data[i].createdAt).toLocaleDateString()
-                : '-';
-
-            row.innerHTML = `
-                <td class="${rankClass}">#${rank}</td>
-                <td>${escapeHtml(data[i].playerName)}</td>
-                <td>${data[i].score}</td>
-                <td>${dateStr}</td>
-            `;
-            leaderboardTbody.appendChild(row);
-        }
-        leaderboardTable.classList.remove('hidden');
+        renderLeaderboardRows(data);
     } catch (err) {
         leaderboardLoading.classList.add('hidden');
+        if (isGitHubPages) {
+            const localData = getLocalLeaderboard();
+            if (!localData || localData.length === 0) {
+                leaderboardEmpty.classList.remove('hidden');
+                return;
+            }
+            renderLeaderboardRows(localData);
+            return;
+        }
         leaderboardError.textContent = 'Could not load leaderboard. Is the server running?';
         leaderboardError.classList.remove('hidden');
     }

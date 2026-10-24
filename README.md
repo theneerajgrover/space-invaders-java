@@ -2,6 +2,8 @@
 
 A beginner-friendly, viva-friendly full-stack Space Invaders arcade game built with vanilla HTML5, CSS3, JavaScript (HTML5 Canvas), Java Spring Boot, and an embedded SQLite database.
 
+🎮 **Play Online Demo:** [https://theneerajgrover.github.io/space-invaders-java/](https://theneerajgrover.github.io/space-invaders-java/)
+
 ---
 
 ## 📋 Table of Contents
