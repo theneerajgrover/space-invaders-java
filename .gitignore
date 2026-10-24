@@ -1,0 +1,46 @@
+# Compiled output
+target/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.code-workspace
+.project
+.classpath
+.settings/
+*.swp
+*.swo
+*~
+.factorypath
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+
+# Environment / secrets
+.env
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# SQLite database files (never commit the live database)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+
+# Maven wrapper jar (downloaded automatically)
+.mvn/wrapper/maven-wrapper.jar
+
+# Temp files
+*.tmp
+*.bak
