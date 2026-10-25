@@ -116,14 +116,36 @@
                 </div>
             </div>
             <div class="gameover-buttons">
-                <button id="save-score-btn" class="btn btn-primary">SAVE SCORE</button>
-                <span id="save-status" class="save-status"></span>
                 <button id="play-again-btn" class="btn btn-secondary">PLAY AGAIN</button>
                 <button id="menu-btn" class="btn btn-secondary">MAIN MENU</button>
             </div>
         </div>
     </div>
 
-    <script src="game.js?v=2"></script>
+    <!-- ===== VICTORY SCREEN ===== -->
+    <div id="victory-screen" class="screen">
+        <div class="starfield" id="victory-starfield"></div>
+        <div class="overlay-content gameover-content">
+            <h2 id="victory-title" class="gameover-title victory-title">VICTORY!</h2>
+            <div class="final-stats">
+                <div class="stat-item">
+                    <span class="stat-label">FINAL SCORE</span>
+                    <span id="victory-final-score" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">ENEMIES DESTROYED</span>
+                    <span id="victory-final-enemies" class="stat-value">0</span>
+                </div>
+            </div>
+            <div class="gameover-buttons">
+                <button id="save-score-btn" class="btn btn-primary">SAVE SCORE</button>
+                <span id="save-status" class="save-status"></span>
+                <button id="victory-play-again-btn" class="btn btn-secondary">PLAY AGAIN</button>
+                <button id="victory-menu-btn" class="btn btn-secondary">MAIN MENU</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js?v=5"></script>
 </body>
 </html>

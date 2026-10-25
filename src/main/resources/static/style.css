@@ -411,7 +411,12 @@ html, body {
 
 .gameover-title {
     font-size: 3rem !important;
+    color: var(--accent-cyan);
     animation: titlePulse 2s ease-in-out infinite;
+}
+
+.victory-title {
+    color: var(--accent-green) !important;
 }
 
 .final-stats {

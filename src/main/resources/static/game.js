@@ -28,6 +28,12 @@ const saveStatus = document.getElementById('save-status');
 const playAgainBtn = document.getElementById('play-again-btn');
 const menuBtn = document.getElementById('menu-btn');
 
+const victoryScreen = document.getElementById('victory-screen');
+const victoryFinalScore = document.getElementById('victory-final-score');
+const victoryFinalEnemies = document.getElementById('victory-final-enemies');
+const victoryPlayAgainBtn = document.getElementById('victory-play-again-btn');
+const victoryMenuBtn = document.getElementById('victory-menu-btn');
+
 // ===== API Base URL =====
 const API_BASE = '/api/scores';
 const isGitHubPages = window.location.hostname.endsWith('github.io');
@@ -529,22 +535,33 @@ function startGame() {
 
 // ===== Game End =====
 function endGame(victory) {
-    gameState = victory ? 'victory' : 'gameover';
     stopGameLoop();
 
-    gameoverTitle.textContent = victory ? 'VICTORY!' : 'GAME OVER';
-    gameoverTitle.style.color = victory ? '#39ff14' : '#00e5ff';
-    finalScore.textContent = score;
-    finalEnemies.textContent = enemiesDestroyed;
+    if (victory) {
+        gameState = 'victory';
+        if (victoryFinalScore) victoryFinalScore.textContent = score;
+        if (victoryFinalEnemies) victoryFinalEnemies.textContent = enemiesDestroyed;
 
-    saveScoreBtn.disabled = false;
-    saveScoreBtn.textContent = 'SAVE SCORE';
-    saveStatus.textContent = '';
-    saveStatus.className = 'save-status';
-    scoreSaved = false;
+        if (saveScoreBtn) {
+            saveScoreBtn.disabled = false;
+            saveScoreBtn.textContent = 'SAVE SCORE';
+        }
+        if (saveStatus) {
+            saveStatus.textContent = '';
+            saveStatus.className = 'save-status';
+        }
+        scoreSaved = false;
 
-    createCSSStarfield('gameover-starfield');
-    showScreen('gameover-screen');
+        createCSSStarfield('victory-starfield');
+        showScreen('victory-screen');
+    } else {
+        gameState = 'gameover';
+        finalScore.textContent = score;
+        finalEnemies.textContent = enemiesDestroyed;
+
+        createCSSStarfield('gameover-starfield');
+        showScreen('gameover-screen');
+    }
 }
 
 // ===== Pause / Resume =====
@@ -564,10 +581,14 @@ function togglePause() {
 async function saveScore() {
     if (scoreSaved) return;
 
-    saveScoreBtn.disabled = true;
-    saveScoreBtn.textContent = 'SAVING...';
-    saveStatus.textContent = '';
-    saveStatus.className = 'save-status';
+    if (saveScoreBtn) {
+        saveScoreBtn.disabled = true;
+        saveScoreBtn.textContent = 'SAVING...';
+    }
+    if (saveStatus) {
+        saveStatus.textContent = '';
+        saveStatus.className = 'save-status';
+    }
 
     const payload = {
         playerName: playerName,
@@ -585,30 +606,42 @@ async function saveScore() {
 
         if (response.status === 201) {
             scoreSaved = true;
-            saveStatus.textContent = '✓ Score saved successfully!';
-            saveStatus.className = 'save-status success';
-            saveScoreBtn.textContent = 'SAVED';
+            if (saveStatus) {
+                saveStatus.textContent = '✓ Score saved successfully!';
+                saveStatus.className = 'save-status success';
+            }
+            if (saveScoreBtn) saveScoreBtn.textContent = 'SAVED';
         } else {
             const errorData = await response.json().catch(() => ({}));
             const msg = errorData.message || 'Failed to save score.';
-            saveStatus.textContent = '✗ ' + msg;
-            saveStatus.className = 'save-status error';
-            saveScoreBtn.disabled = false;
-            saveScoreBtn.textContent = 'SAVE SCORE';
+            if (saveStatus) {
+                saveStatus.textContent = '✗ ' + msg;
+                saveStatus.className = 'save-status error';
+            }
+            if (saveScoreBtn) {
+                saveScoreBtn.disabled = false;
+                saveScoreBtn.textContent = 'SAVE SCORE';
+            }
         }
     } catch (err) {
         if (isGitHubPages) {
             saveLocalScore(payload);
             scoreSaved = true;
-            saveStatus.textContent = '✓ Score saved (Browser Storage)';
-            saveStatus.className = 'save-status success';
-            saveScoreBtn.textContent = 'SAVED';
+            if (saveStatus) {
+                saveStatus.textContent = '✓ Score saved (Browser Storage)';
+                saveStatus.className = 'save-status success';
+            }
+            if (saveScoreBtn) saveScoreBtn.textContent = 'SAVED';
             return;
         }
-        saveStatus.textContent = '✗ Could not connect to server.';
-        saveStatus.className = 'save-status error';
-        saveScoreBtn.disabled = false;
-        saveScoreBtn.textContent = 'SAVE SCORE';
+        if (saveStatus) {
+            saveStatus.textContent = '✗ Could not connect to server.';
+            saveStatus.className = 'save-status error';
+        }
+        if (saveScoreBtn) {
+            saveScoreBtn.disabled = false;
+            saveScoreBtn.textContent = 'SAVE SCORE';
+        }
     }
 }
 
@@ -673,7 +706,9 @@ instructionsBackBtn.addEventListener('click', () => {
     showScreen('menu-screen');
 });
 
-saveScoreBtn.addEventListener('click', saveScore);
+if (saveScoreBtn) {
+    saveScoreBtn.addEventListener('click', saveScore);
+}
 
 playAgainBtn.addEventListener('click', () => {
     initGame();
@@ -687,6 +722,23 @@ menuBtn.addEventListener('click', () => {
     gameState = 'menu';
     showScreen('menu-screen');
 });
+
+if (victoryPlayAgainBtn) {
+    victoryPlayAgainBtn.addEventListener('click', () => {
+        initGame();
+        gameState = 'playing';
+        showScreen('game-screen');
+        startGameLoop();
+    });
+}
+
+if (victoryMenuBtn) {
+    victoryMenuBtn.addEventListener('click', () => {
+        stopGameLoop();
+        gameState = 'menu';
+        showScreen('menu-screen');
+    });
+}
 
 // ===== Initialize CSS starfield for menu =====
 createCSSStarfield('menu-starfield');
