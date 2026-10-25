@@ -6,12 +6,13 @@
 const menuScreen = document.getElementById('menu-screen');
 const gameScreen = document.getElementById('game-screen');
 const gameoverScreen = document.getElementById('gameover-screen');
-const leaderboardScreen = document.getElementById('leaderboard-screen');
+const instructionsScreen = document.getElementById('instructions-screen');
 
 const playerNameInput = document.getElementById('player-name-input');
 const nameError = document.getElementById('name-error');
 const startBtn = document.getElementById('start-btn');
-const leaderboardBtn = document.getElementById('leaderboard-btn');
+const instructionsBtn = document.getElementById('instructions-btn');
+const instructionsBackBtn = document.getElementById('instructions-back-btn');
 
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
@@ -26,13 +27,6 @@ const saveScoreBtn = document.getElementById('save-score-btn');
 const saveStatus = document.getElementById('save-status');
 const playAgainBtn = document.getElementById('play-again-btn');
 const menuBtn = document.getElementById('menu-btn');
-
-const leaderboardLoading = document.getElementById('leaderboard-loading');
-const leaderboardEmpty = document.getElementById('leaderboard-empty');
-const leaderboardError = document.getElementById('leaderboard-error');
-const leaderboardTable = document.getElementById('leaderboard-table');
-const leaderboardTbody = document.getElementById('leaderboard-tbody');
-const leaderboardBackBtn = document.getElementById('leaderboard-back-btn');
 
 // ===== API Base URL =====
 const API_BASE = '/api/scores';
@@ -49,14 +43,6 @@ function saveLocalScore(item) {
         localStorage.setItem('space_invaders_scores', JSON.stringify(scores.slice(0, 10)));
     } catch (e) {
         console.warn('LocalStorage unavailable', e);
-    }
-}
-
-function getLocalLeaderboard() {
-    try {
-        return JSON.parse(localStorage.getItem('space_invaders_scores') || '[]');
-    } catch (e) {
-        return [];
     }
 }
 
@@ -93,7 +79,7 @@ const MAX_SCORE = 999999;
 // ===== Game State =====
 let playerName = '';
 let animFrameId = null;
-let gameState = 'menu'; // menu, playing, paused, gameover, victory, leaderboard
+let gameState = 'menu'; // menu, playing, paused, gameover, victory, instructions
 
 let player = {};
 let bullets = [];
@@ -142,7 +128,7 @@ function drawStars() {
     }
 }
 
-// CSS starfield for menu/gameover/leaderboard backgrounds
+// CSS starfield for menu/gameover backgrounds
 function createCSSStarfield(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -626,70 +612,6 @@ async function saveScore() {
     }
 }
 
-// ===== Leaderboard =====
-function renderLeaderboardRows(data) {
-    leaderboardTbody.innerHTML = '';
-    for (let i = 0; i < data.length; i++) {
-        const row = document.createElement('tr');
-        const rank = i + 1;
-        let rankClass = '';
-        if (rank === 1) rankClass = 'rank-gold';
-        else if (rank === 2) rankClass = 'rank-silver';
-        else if (rank === 3) rankClass = 'rank-bronze';
-
-        const dateStr = data[i].createdAt
-            ? new Date(data[i].createdAt).toLocaleDateString()
-            : '-';
-
-        row.innerHTML = `
-            <td class="${rankClass}">#${rank}</td>
-            <td>${escapeHtml(data[i].playerName)}</td>
-            <td>${data[i].score}</td>
-            <td>${dateStr}</td>
-        `;
-        leaderboardTbody.appendChild(row);
-    }
-    leaderboardTable.classList.remove('hidden');
-}
-
-async function loadLeaderboard() {
-    leaderboardLoading.classList.remove('hidden');
-    leaderboardEmpty.classList.add('hidden');
-    leaderboardError.classList.add('hidden');
-    leaderboardTable.classList.add('hidden');
-    leaderboardTbody.innerHTML = '';
-
-    try {
-        const response = await fetch(API_BASE + '/leaderboard');
-        if (!response.ok) {
-            throw new Error('Server returned ' + response.status);
-        }
-
-        const data = await response.json();
-        leaderboardLoading.classList.add('hidden');
-
-        if (!data || data.length === 0) {
-            leaderboardEmpty.classList.remove('hidden');
-            return;
-        }
-
-        renderLeaderboardRows(data);
-    } catch (err) {
-        leaderboardLoading.classList.add('hidden');
-        if (isGitHubPages) {
-            const localData = getLocalLeaderboard();
-            if (!localData || localData.length === 0) {
-                leaderboardEmpty.classList.remove('hidden');
-                return;
-            }
-            renderLeaderboardRows(localData);
-            return;
-        }
-        leaderboardError.textContent = 'Could not load leaderboard. Is the server running?';
-        leaderboardError.classList.remove('hidden');
-    }
-}
-
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
@@ -718,6 +640,12 @@ document.addEventListener('keydown', (e) => {
         gameState = 'playing';
         startGameLoop();
     }
+
+    // Escape to close instructions
+    if (e.key === 'Escape' && gameState === 'instructions') {
+        showScreen('menu-screen');
+        gameState = 'menu';
+    }
 });
 
 document.addEventListener('keyup', (e) => {
@@ -734,13 +662,14 @@ playerNameInput.addEventListener('keydown', (e) => {
     }
 });
 
-leaderboardBtn.addEventListener('click', () => {
-    createCSSStarfield('leaderboard-starfield');
-    showScreen('leaderboard-screen');
-    loadLeaderboard();
+instructionsBtn.addEventListener('click', () => {
+    createCSSStarfield('instructions-starfield');
+    gameState = 'instructions';
+    showScreen('instructions-screen');
 });
 
-leaderboardBackBtn.addEventListener('click', () => {
+instructionsBackBtn.addEventListener('click', () => {
+    gameState = 'menu';
     showScreen('menu-screen');
 });
 

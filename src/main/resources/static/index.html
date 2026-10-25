@@ -18,44 +18,64 @@
     <!-- ===== MAIN MENU SCREEN ===== -->
     <div id="menu-screen" class="screen active">
         <div class="starfield" id="menu-starfield"></div>
-        <div class="menu-content">
-            <h1 class="game-title">SPACE<br><span class="title-accent">INVADERS</span></h1>
-            <p class="subtitle">DEFEND EARTH FROM THE ALIEN INVASION</p>
-
-            <div class="name-input-group">
-                <label for="player-name-input">PILOT NAME</label>
-                <input type="text" id="player-name-input" maxlength="20" placeholder="Enter your name..." autocomplete="off">
-                <p id="name-error" class="error-text"></p>
+        <div class="menu-content menu-two-col">
+            <div class="menu-col-left">
+                <h1 class="game-title">SPACE<br><span class="title-accent">INVADERS</span></h1>
+                <p class="subtitle">DEFEND EARTH FROM THE ALIEN INVASION</p>
             </div>
-
-            <div class="menu-buttons">
-                <button id="start-btn" class="btn btn-primary">START GAME</button>
-                <button id="leaderboard-btn" class="btn btn-secondary">LEADERBOARD</button>
-            </div>
-
-            <div class="how-to-play">
-                <h2>HOW TO PLAY</h2>
-                <div class="controls-grid">
-                    <div class="control-item">
-                        <span class="key">←</span><span class="key">→</span>
-                        <span class="control-label">or</span>
-                        <span class="key">A</span><span class="key">D</span>
-                        <span class="control-label">Move Ship</span>
-                    </div>
-                    <div class="control-item">
-                        <span class="key">SPACE</span>
-                        <span class="control-label">Shoot</span>
-                    </div>
-                    <div class="control-item">
-                        <span class="key">P</span>
-                        <span class="control-label">Pause / Resume</span>
-                    </div>
-                    <div class="control-item">
-                        <span class="key">R</span>
-                        <span class="control-label">Restart</span>
-                    </div>
+            <div class="menu-col-right">
+                <div class="name-input-group">
+                    <label for="player-name-input">PILOT NAME</label>
+                    <input type="text" id="player-name-input" maxlength="20" placeholder="Enter your name..." autocomplete="off">
+                    <p id="name-error" class="error-text"></p>
+                </div>
+                <div class="menu-buttons">
+                    <button id="start-btn" class="btn btn-primary">START GAME</button>
+                    <button id="instructions-btn" class="btn btn-secondary">INSTRUCTIONS</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- ===== INSTRUCTIONS SCREEN ===== -->
+    <div id="instructions-screen" class="screen">
+        <div class="starfield" id="instructions-starfield"></div>
+        <div class="instructions-content">
+            <h2 class="instructions-title">INSTRUCTIONS</h2>
+            <div class="instructions-body">
+                <div class="instructions-section">
+                    <h3>OBJECTIVE</h3>
+                    <p>Destroy all alien invaders before they reach your ship. You have 3 lives.</p>
+                </div>
+                <div class="instructions-section">
+                    <h3>CONTROLS</h3>
+                    <div class="controls-grid">
+                        <div class="control-item">
+                            <span class="key">←</span><span class="key">→</span>
+                            <span class="control-label">or</span>
+                            <span class="key">A</span><span class="key">D</span>
+                            <span class="control-label">Move Ship</span>
+                        </div>
+                        <div class="control-item">
+                            <span class="key">SPACE</span>
+                            <span class="control-label">Shoot</span>
+                        </div>
+                        <div class="control-item">
+                            <span class="key">P</span>
+                            <span class="control-label">Pause / Resume</span>
+                        </div>
+                        <div class="control-item">
+                            <span class="key">R</span>
+                            <span class="control-label">Restart</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="instructions-section">
+                    <h3>SCORING</h3>
+                    <p>Each alien destroyed = <strong>100 points</strong>. Save your score after the game ends.</p>
+                </div>
+            </div>
+            <button id="instructions-back-btn" class="btn btn-secondary">BACK TO MENU</button>
         </div>
     </div>
 
@@ -104,31 +124,6 @@
         </div>
     </div>
 
-    <!-- ===== LEADERBOARD SCREEN ===== -->
-    <div id="leaderboard-screen" class="screen">
-        <div class="starfield" id="leaderboard-starfield"></div>
-        <div class="leaderboard-content">
-            <h2 class="leaderboard-title">LEADERBOARD</h2>
-            <div id="leaderboard-body">
-                <p id="leaderboard-loading" class="loading-text">Loading scores...</p>
-                <p id="leaderboard-empty" class="empty-text hidden">No scores yet. Play your first game!</p>
-                <p id="leaderboard-error" class="error-text hidden"></p>
-                <table id="leaderboard-table" class="leaderboard-table hidden">
-                    <thead>
-                        <tr>
-                            <th>RANK</th>
-                            <th>PILOT</th>
-                            <th>SCORE</th>
-                            <th>DATE</th>
-                        </tr>
-                    </thead>
-                    <tbody id="leaderboard-tbody"></tbody>
-                </table>
-            </div>
-            <button id="leaderboard-back-btn" class="btn btn-secondary">BACK TO MENU</button>
-        </div>
-    </div>
-
-    <script src="game.js"></script>
+    <script src="game.js?v=2"></script>
 </body>
 </html>
