@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="auto" style="background:#0a0a1a; border-radius:12px; overflow:hidden;">
+  <defs>
+    <radialGradient id="archBg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#141432"/>
+      <stop offset="100%" stop-color="#0a0a1a"/>
+    </radialGradient>
+
+    <linearGradient id="clientGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#19223c"/>
+      <stop offset="100%" stop-color="#0d1424"/>
+    </linearGradient>
+
+    <linearGradient id="serverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#142c1d"/>
+      <stop offset="100%" stop-color="#0b1710"/>
+    </linearGradient>
+
+    <linearGradient id="dbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1834"/>
+      <stop offset="100%" stop-color="#0f0c1a"/>
+    </linearGradient>
+
+    <filter id="boxGlowCyan" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="boxGlowGreen" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="boxGlowPurple" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Marker Arrowheads -->
+    <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0 0 L6 3 L0 6 Z" fill="#00e5ff"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0 0 L6 3 L0 6 Z" fill="#39ff14"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0 0 L6 3 L0 6 Z" fill="#b388ff"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="480" fill="url(#archBg)"/>
+  <rect x="2" y="2" width="896" height="476" rx="10" fill="none" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.25"/>
+
+  <!-- Diagram Title Header -->
+  <g transform="translate(450, 38)" text-anchor="middle">
+    <text font-family="'Segoe UI', Consolas, sans-serif" font-size="16" font-weight="900" fill="#ffffff" letter-spacing="4">SYSTEM ARCHITECTURE</text>
+    <text y="20" font-family="'Segoe UI', Consolas, sans-serif" font-size="11" font-weight="700" fill="#00e5ff" letter-spacing="2">CLIENT-SIDE 60 FPS ENGINE ⇄ SPRING BOOT 3 REST TIER ⇄ SQLITE STORAGE</text>
+  </g>
+
+  <!-- ================= TIER 1: CLIENT BROWSER ================= -->
+  <g transform="translate(40, 85)">
+    <!-- Container Card -->
+    <rect width="250" height="355" rx="8" fill="url(#clientGrad)" stroke="#00e5ff" stroke-width="1.2" filter="url(#boxGlowCyan)"/>
+    
+    <!-- Tier Header -->
+    <rect x="0" y="0" width="250" height="36" rx="8" fill="#00e5ff" fill-opacity="0.12"/>
+    <text x="125" y="23" text-anchor="middle" font-family="'Segoe UI', Consolas, monospace" font-size="12" font-weight="800" fill="#00e5ff" letter-spacing="2">1. CLIENT TIER (BROWSER)</text>
+
+    <!-- Component 1: index.html & style.css -->
+    <g transform="translate(15, 50)">
+      <rect width="220" height="52" rx="6" fill="#0a0a1a" stroke="#00e5ff" stroke-width="0.8" stroke-opacity="0.5"/>
+      <text x="12" y="20" font-family="'Segoe UI', Consolas, sans-serif" font-size="11" font-weight="700" fill="#ffffff">index.html &amp; style.css</text>
+      <text x="12" y="38" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">Menu UI, HUD, Overlays, Stars</text>
+    </g>
+
+    <!-- Component 2: Canvas Rendering Loop -->
+    <g transform="translate(15, 115)">
+      <rect width="220" height="66" rx="6" fill="#0a0a1a" stroke="#00e5ff" stroke-width="0.8" stroke-opacity="0.5"/>
+      <text x="12" y="20" font-family="'Segoe UI', Consolas, sans-serif" font-size="11" font-weight="700" fill="#00e5ff">HTML5 Canvas (800×600)</text>
+      <text x="12" y="38" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">• requestAnimationFrame 60 FPS</text>
+      <text x="12" y="52" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">• Vectors, Glows &amp; Starfield</text>
+    </g>
+
+    <!-- Component 3: Game Logic Engine -->
+    <g transform="translate(15, 195)">
+      <rect width="220" height="74" rx="6" fill="#0a0a1a" stroke="#00e5ff" stroke-width="0.8" stroke-opacity="0.5"/>
+      <text x="12" y="20" font-family="'Segoe UI', Consolas, sans-serif" font-size="11" font-weight="700" fill="#39ff14">game.js (Engine)</text>
+      <text x="12" y="38" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">• Keyboard Listener (←/→/Space/P/R)</text>
+      <text x="12" y="52" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">• AABB Collision &amp; Formation AI</text>
+      <text x="12" y="66" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">• Score, Lives &amp; Win/Loss States</text>
+    </g>
+
+    <!-- Component 4: REST API Fetch Client -->
+    <g transform="translate(15, 282)">
+      <rect width="220" height="56" rx="6" fill="#0a0a1a" stroke="#00e5ff" stroke-width="0.8" stroke-opacity="0.8"/>
+      <text x="12" y="20" font-family="'Segoe UI', Consolas, sans-serif" font-size="11" font-weight="700" fill="#ffffff">REST Fetch Client</text>
+      <text x="12" y="36" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">Async POST on Victory</text>
+      <text x="12" y="48" font-family="'Segoe UI', Consolas, sans-serif" font-size="9" fill="#00e5ff">localStorage Fallback (GitHub Pages)</text>
+    </g>
+  </g>
+
+  <!-- ================= TIER CONNECTOR 1 -> 2 ================= -->
+  <g transform="translate(290, 240)">
+    <!-- Right arrow for POST /api/scores -->
+    <path d="M0 8 L32 8" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrowCyan)"/>
+    <text x="16" y="-2" text-anchor="middle" font-family="'Segoe UI', Consolas, monospace" font-size="8.5" font-weight="700" fill="#00e5ff">POST /api/scores</text>
+    <text x="16" y="22" text-anchor="middle" font-family="'Segoe UI', Consolas, monospace" font-size="8" fill="#8892a0">JSON Payload</text>
+
+    <!-- Note: Disconnected from frame loop -->
+    <rect x="-10" y="70" width="54" height="28" rx="4" fill="#0a0a1a" stroke="#8892a0" stroke-width="0.6"/>
+    <text x="17" y="82" text-anchor="middle" font-family="'Segoe UI', Consolas, sans-serif" font-size="7" fill="#8892a0">NO PER-FRAME</text>
+    <text x="17" y="92" text-anchor="middle" font-family="'Segoe UI', Consolas, sans-serif" font-size="7" fill="#8892a0">SERVER CALLS</text>
+  </g>
+
+  <!-- ================= TIER 2: SPRING BOOT BACKEND ================= -->
+  <g transform="translate(325, 85)">
+    <!-- Container Card -->
+    <rect width="270" height="355" rx="8" fill="url(#serverGrad)" stroke="#39ff14" stroke-width="1.2" filter="url(#boxGlowGreen)"/>
+    
+    <!-- Tier Header -->
+    <rect x="0" y="0" width="270" height="36" rx="8" fill="#39ff14" fill-opacity="0.12"/>
+    <text x="135" y="23" text-anchor="middle" font-family="'Segoe UI', Consolas, monospace" font-size="12" font-weight="800" fill="#39ff14" letter-spacing="2">2. BACKEND (SPRING BOOT 3)</text>
+
+    <!-- Component 1: Controller -->
+    <g transform="translate(15, 50)">
+      <rect width="240" height="60" rx="6" fill="#0a0a1a" stroke="#39ff14" stroke-width="0.8" stroke-opacity="0.5"/>
+      <text x="12" y="20" font-family="'Segoe UI', Consolas, sans-serif" font-size="11" font-weight="700" fill="#ffffff">GameScoreController</text>
+      <text x="12" y="38" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">@RestController @RequestMapping("/api/scores")</text>
+      <text x="12" y="50" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#39ff14">@Valid @RequestBody validation</text>
+    </g>
+
+    <!-- Component 2: Service Layer -->
+    <g transform="translate(15, 122)">
+      <rect width="240" height="60" rx="6" fill="#0a0a1a" stroke="#39ff14" stroke-width="0.8" stroke-opacity="0.5"/>
+      <text x="12" y="20" font-family="'Segoe UI', Consolas, sans-serif" font-size="11" font-weight="700" fill="#ffffff">GameScoreService</text>
+      <text x="12" y="38" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">• Business logic &amp; input sanitization</text>
+      <text x="12" y="50" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">• Trims player name, slices top-10 scores</text>
+    </g>
+
+    <!-- Component 3: Exception Handler -->
+    <g transform="translate(15, 194)">
+      <rect width="240" height="50" rx="6" fill="#0a0a1a" stroke="#39ff14" stroke-width="0.8" stroke-opacity="0.5"/>
+      <text x="12" y="18" font-family="'Segoe UI', Consolas, sans-serif" font-size="11" font-weight="700" fill="#ffffff">GlobalExceptionHandler</text>
+      <text x="12" y="34" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">@RestControllerAdvice • JSON 400/500 errors</text>
+    </g>
+
+    <!-- Component 4: Repository & Entity -->
+    <g transform="translate(15, 256)">
+      <rect width="240" height="82" rx="6" fill="#0a0a1a" stroke="#39ff14" stroke-width="0.8" stroke-opacity="0.8"/>
+      <text x="12" y="20" font-family="'Segoe UI', Consolas, sans-serif" font-size="11" font-weight="700" fill="#39ff14">GameScoreRepository &amp; Entity</text>
+      <text x="12" y="38" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">• Spring Data JPA + Hibernate ORM</text>
+      <text x="12" y="52" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">• JPQL: ORDER BY score DESC, createdAt ASC</text>
+      <text x="12" y="66" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">• @PrePersist: automatic createdAt timestamp</text>
+    </g>
+  </g>
+
+  <!-- ================= TIER CONNECTOR 2 -> 3 ================= -->
+  <g transform="translate(595, 260)">
+    <!-- Right arrow for JDBC -->
+    <path d="M0 8 L32 8" stroke="#39ff14" stroke-width="2" marker-end="url(#arrowGreen)"/>
+    <text x="16" y="-2" text-anchor="middle" font-family="'Segoe UI', Consolas, monospace" font-size="8.5" font-weight="700" fill="#39ff14">JDBC</text>
+    <text x="16" y="22" text-anchor="middle" font-family="'Segoe UI', Consolas, monospace" font-size="8" fill="#8892a0">SQLite Driver</text>
+  </g>
+
+  <!-- ================= TIER 3: SQLITE DATABASE ================= -->
+  <g transform="translate(630, 85)">
+    <!-- Container Card -->
+    <rect width="230" height="355" rx="8" fill="url(#dbGrad)" stroke="#b388ff" stroke-width="1.2" filter="url(#boxGlowPurple)"/>
+    
+    <!-- Tier Header -->
+    <rect x="0" y="0" width="230" height="36" rx="8" fill="#b388ff" fill-opacity="0.12"/>
+    <text x="115" y="23" text-anchor="middle" font-family="'Segoe UI', Consolas, monospace" font-size="12" font-weight="800" fill="#b388ff" letter-spacing="2">3. SQLITE DATABASE</text>
+
+    <!-- Database File Info -->
+    <g transform="translate(15, 50)">
+      <rect width="200" height="60" rx="6" fill="#0a0a1a" stroke="#b388ff" stroke-width="0.8" stroke-opacity="0.5"/>
+      <text x="12" y="20" font-family="'Segoe UI', Consolas, sans-serif" font-size="11" font-weight="700" fill="#ffffff">Embedded Database</text>
+      <text x="12" y="38" font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#b388ff">data/space_invaders.db</text>
+      <text x="12" y="50" font-family="'Segoe UI', Consolas, sans-serif" font-size="9" fill="#8892a0">Auto-created on launch</text>
+    </g>
+
+    <!-- Schema Details -->
+    <g transform="translate(15, 122)">
+      <rect width="200" height="135" rx="6" fill="#0a0a1a" stroke="#b388ff" stroke-width="0.8" stroke-opacity="0.5"/>
+      <text x="12" y="20" font-family="'Segoe UI', Consolas, sans-serif" font-size="11" font-weight="700" fill="#00e5ff">Table: game_scores</text>
+      <text x="12" y="38" font-family="'Segoe UI', Consolas, monospace" font-size="9" fill="#e0e0e0">• id (INTEGER PK AUTO)</text>
+      <text x="12" y="52" font-family="'Segoe UI', Consolas, monospace" font-size="9" fill="#e0e0e0">• player_name (VARCHAR 20)</text>
+      <text x="12" y="66" font-family="'Segoe UI', Consolas, monospace" font-size="9" fill="#e0e0e0">• score (INTEGER 0..999999)</text>
+      <text x="12" y="80" font-family="'Segoe UI', Consolas, monospace" font-size="9" fill="#e0e0e0">• enemies_destroyed (INT)</text>
+      <text x="12" y="94" font-family="'Segoe UI', Consolas, monospace" font-size="9" fill="#e0e0e0">• completion_status (TXT)</text>
+      <text x="12" y="108" font-family="'Segoe UI', Consolas, monospace" font-size="9" fill="#e0e0e0">• created_at (DATETIME)</text>
+      <text x="12" y="124" font-family="'Segoe UI', Consolas, sans-serif" font-size="8.5" fill="#39ff14">ddl-auto=update (persists restarts)</text>
+    </g>
+
+    <!-- Test Isolation Note -->
+    <g transform="translate(15, 269)">
+      <rect width="200" height="69" rx="6" fill="#0a0a1a" stroke="#b388ff" stroke-width="0.8" stroke-opacity="0.8"/>
+      <text x="12" y="18" font-family="'Segoe UI', Consolas, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff">Test Isolation Profile</text>
+      <text x="12" y="34" font-family="'Segoe UI', Consolas, sans-serif" font-size="9" fill="#8892a0">data/test_space_invaders.db</text>
+      <text x="12" y="48" font-family="'Segoe UI', Consolas, sans-serif" font-size="9" fill="#8892a0">create-drop schema</text>
+      <text x="12" y="60" font-family="'Segoe UI', Consolas, sans-serif" font-size="8.5" fill="#b388ff">Zero test pollution</text>
+    </g>
+  </g>
+
+  <!-- Bottom Legend / Footnote -->
+  <g transform="translate(450, 462)" text-anchor="middle">
+    <text font-family="'Segoe UI', Consolas, sans-serif" font-size="9.5" fill="#8892a0">High-performance decoupled design: Browser drives 60 FPS real-time action • Server handles persistent score records</text>
+  </g>
+</svg>

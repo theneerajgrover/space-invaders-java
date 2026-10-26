@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 165 32" width="165" height="32">
+  <defs>
+    <linearGradient id="g_badgehtml5svg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14142b"/>
+      <stop offset="100%" stop-color="#0a0a1a"/>
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="164" height="31" rx="6" fill="url(#g_badgehtml5svg)" stroke="#E34F26" stroke-width="1" stroke-opacity="0.4"/>
+  <rect x="2" y="2" width="28" height="28" rx="4" fill="#E34F26" fill-opacity="0.15"/>
+  <g transform="translate(4, 4)">
+    <path d="M4 2l1.6 18 6.4 2 6.4-2L20 2H4zm13 5h-7.6l.2 2.4H17l-.8 8.6-4.2 1.2-4.2-1.2-.3-3.2h2.4l.2 1.6 1.9.5 1.9-.5.2-2.4H8.4L7.8 7h9.2V7z" fill="#E34F26"/>
+  </g>
+  <text x="36" y="14" font-family="'Segoe UI', Consolas, sans-serif" font-size="8.5" font-weight="700" fill="#8892a0" letter-spacing="1">HTML5</text>
+  <text x="36" y="24" font-family="'Segoe UI', Consolas, sans-serif" font-size="10" font-weight="800" fill="#ffffff" letter-spacing="0.5">CANVAS 60FPS</text>
+</svg>

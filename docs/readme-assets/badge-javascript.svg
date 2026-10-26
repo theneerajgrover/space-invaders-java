@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 165 32" width="165" height="32">
+  <defs>
+    <linearGradient id="g_badgejavascriptsvg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14142b"/>
+      <stop offset="100%" stop-color="#0a0a1a"/>
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="164" height="31" rx="6" fill="url(#g_badgejavascriptsvg)" stroke="#F7DF1E" stroke-width="1" stroke-opacity="0.4"/>
+  <rect x="2" y="2" width="28" height="28" rx="4" fill="#F7DF1E" fill-opacity="0.15"/>
+  <g transform="translate(4, 4)">
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F7DF1E"/><text x="12" y="17" font-family="sans-serif" font-weight="900" font-size="9" fill="#000" text-anchor="middle">JS</text>
+  </g>
+  <text x="36" y="14" font-family="'Segoe UI', Consolas, sans-serif" font-size="8.5" font-weight="700" fill="#8892a0" letter-spacing="1">JAVASCRIPT</text>
+  <text x="36" y="24" font-family="'Segoe UI', Consolas, sans-serif" font-size="10" font-weight="800" fill="#ffffff" letter-spacing="0.5">VANILLA ES6+</text>
+</svg>

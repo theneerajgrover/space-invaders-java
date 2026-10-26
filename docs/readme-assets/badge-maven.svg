@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 165 32" width="165" height="32">
+  <defs>
+    <linearGradient id="g_badgemavensvg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14142b"/>
+      <stop offset="100%" stop-color="#0a0a1a"/>
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="164" height="31" rx="6" fill="url(#g_badgemavensvg)" stroke="#C71A36" stroke-width="1" stroke-opacity="0.4"/>
+  <rect x="2" y="2" width="28" height="28" rx="4" fill="#C71A36" fill-opacity="0.15"/>
+  <g transform="translate(4, 4)">
+    <path d="M12 2L4 7v10l8 5 8-5V7l-8-5zm0 2.2l6 3.8v7.6l-6 3.8-6-3.8V8l6-3.8z" fill="#C71A36"/>
+  </g>
+  <text x="36" y="14" font-family="'Segoe UI', Consolas, sans-serif" font-size="8.5" font-weight="700" fill="#8892a0" letter-spacing="1">MAVEN</text>
+  <text x="36" y="24" font-family="'Segoe UI', Consolas, sans-serif" font-size="10" font-weight="800" fill="#ffffff" letter-spacing="0.5">BUILD TOOL</text>
+</svg>

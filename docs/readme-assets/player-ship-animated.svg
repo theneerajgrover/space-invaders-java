@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" style="background:#0a0a1a; border-radius:12px; overflow:hidden;">
+  <defs>
+    <radialGradient id="shipBg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#141e33" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#0c0c20" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0a0a1a" stop-opacity="1"/>
+    </radialGradient>
+
+    <filter id="shipGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="6" result="blur1"/>
+      <feGaussianBlur stdDeviation="14" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="greenGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <style>
+      @keyframes floatShip {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-7px); }
+      }
+      @keyframes shootBolt {
+        0% { transform: translateY(0); opacity: 1; }
+        70% { opacity: 1; }
+        100% { transform: translateY(-160px); opacity: 0; }
+      }
+      @keyframes flamePulse {
+        0%, 100% { transform: scaleY(1); opacity: 0.85; }
+        50% { transform: scaleY(1.4); opacity: 1; }
+      }
+
+      .ship-body {
+        animation: floatShip 2.8s ease-in-out infinite;
+        transform-origin: 120px 140px;
+      }
+      .laser-blast {
+        animation: shootBolt 1.2s cubic-bezier(0.2, 0.7, 0.4, 1) infinite;
+      }
+      .thruster-flame {
+        animation: flamePulse 0.2s ease-in-out infinite;
+        transform-origin: 120px 174px;
+      }
+    </style>
+  </defs>
+
+  <rect width="240" height="240" fill="url(#shipBg)"/>
+  <rect x="2" y="2" width="236" height="236" rx="10" fill="none" stroke="#00e5ff" stroke-width="1.2" stroke-opacity="0.3"/>
+
+  <!-- Continuous Laser Fire -->
+  <g class="laser-blast" transform="translate(120, 110)">
+    <rect x="-3" y="-12" width="6" height="26" rx="3" fill="#39ff14" filter="url(#greenGlow)"/>
+    <circle cx="0" cy="-12" r="4" fill="#ffffff"/>
+  </g>
+
+  <!-- Player Ship (Triangle vector with cockpit and glowing thruster) -->
+  <g class="ship-body" transform="translate(120, 130)">
+    <!-- Engine Plasma Flame -->
+    <polygon points="-12,44 12,44 0,66" fill="#39ff14" filter="url(#greenGlow)" class="thruster-flame"/>
+    <polygon points="-7,44 7,44 0,56" fill="#ffffff" class="thruster-flame"/>
+
+    <!-- Main Hull -->
+    <polygon points="0,-24 -48,44 48,44" fill="#00e5ff" filter="url(#shipGlow)"/>
+
+    <!-- Cockpit Canopy -->
+    <polygon points="0,-12 -16,36 16,36" fill="#004d66"/>
+    <polygon points="0,-8 -10,32 10,32" fill="#002433"/>
+
+    <!-- Wing Highlight Details -->
+    <polygon points="0,-20 -44,40 -38,40" fill="#ffffff" opacity="0.6"/>
+    <polygon points="0,-20 44,40 38,40" fill="#ffffff" opacity="0.6"/>
+    <rect x="-18" y="40" width="36" height="6" fill="#39ff14"/>
+  </g>
+
+  <!-- Bottom Tag -->
+  <text x="120" y="214" text-anchor="middle" font-family="'Segoe UI', Consolas, monospace" font-size="11" font-weight="700" fill="#8892a0" letter-spacing="3">DEFENSE CANNON</text>
+</svg>

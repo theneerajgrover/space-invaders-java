@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" style="background:#0a0a1a; border-radius:12px; overflow:hidden;">
+  <defs>
+    <radialGradient id="invaderBg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#191938" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#0c0c20" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0a0a1a" stop-opacity="1"/>
+    </radialGradient>
+
+    <filter id="invaderGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="6" result="blur1"/>
+      <feGaussianBlur stdDeviation="15" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <style>
+      @keyframes floatBob {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+      @keyframes shuffleA {
+        0%, 49.9% { opacity: 1; display: inline; }
+        50%, 100% { opacity: 0; display: none; }
+      }
+      @keyframes shuffleB {
+        0%, 49.9% { opacity: 0; display: none; }
+        50%, 100% { opacity: 1; display: inline; }
+      }
+      @keyframes eyeGlow {
+        0%, 100% { fill: #ffffff; }
+        50% { fill: #00e5ff; }
+      }
+      .invader-root {
+        animation: floatBob 3s ease-in-out infinite;
+        transform-origin: 120px 120px;
+      }
+      .frame-1 {
+        animation: shuffleA 0.9s infinite;
+      }
+      .frame-2 {
+        animation: shuffleB 0.9s infinite;
+      }
+      .eyes {
+        animation: eyeGlow 2.5s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+
+  <rect width="240" height="240" fill="url(#invaderBg)"/>
+  <rect x="2" y="2" width="236" height="236" rx="10" fill="none" stroke="#b388ff" stroke-width="1.2" stroke-opacity="0.3"/>
+
+  <!-- Centered Alien Character (11x8 Grid scaled by 12 = 132x96) -->
+  <g class="invader-root" transform="translate(54, 72)" filter="url(#invaderGlow)">
+    <!-- Frame 1: Tentacles Outward -->
+    <g class="frame-1" fill="#00e5ff">
+      <!-- Row 0: Horns -->
+      <rect x="24" y="0" width="12" height="12"/>
+      <rect x="96" y="0" width="12" height="12"/>
+      <!-- Row 1: Forehead -->
+      <rect x="36" y="12" width="60" height="12"/>
+      <!-- Row 2: Brow -->
+      <rect x="24" y="24" width="84" height="12"/>
+      <!-- Row 3: Eyes Row -->
+      <rect x="12" y="36" width="108" height="12"/>
+      <!-- Row 4: Cheeks/Body -->
+      <rect x="0" y="48" width="132" height="12"/>
+      <!-- Row 5: Mouth/Body -->
+      <rect x="0" y="60" width="132" height="12"/>
+      <!-- Row 6: Legs Frame 1 -->
+      <rect x="0" y="72" width="24" height="12"/>
+      <rect x="48" y="72" width="36" height="12"/>
+      <rect x="108" y="72" width="24" height="12"/>
+      <!-- Row 7: Feet Frame 1 -->
+      <rect x="12" y="84" width="12" height="12"/>
+      <rect x="108" y="84" width="12" height="12"/>
+      <!-- Eyes cutout -->
+      <rect x="24" y="36" width="12" height="12" class="eyes"/>
+      <rect x="96" y="36" width="12" height="12" class="eyes"/>
+      <rect x="27" y="39" width="6" height="6" fill="#0a0a1a"/>
+      <rect x="99" y="39" width="6" height="6" fill="#0a0a1a"/>
+    </g>
+
+    <!-- Frame 2: Tentacles Inward -->
+    <g class="frame-2" fill="#b388ff">
+      <!-- Row 0: Horns -->
+      <rect x="24" y="0" width="12" height="12"/>
+      <rect x="96" y="0" width="12" height="12"/>
+      <!-- Row 1: Forehead -->
+      <rect x="36" y="12" width="60" height="12"/>
+      <!-- Row 2: Brow -->
+      <rect x="24" y="24" width="84" height="12"/>
+      <!-- Row 3: Eyes Row -->
+      <rect x="12" y="36" width="108" height="12"/>
+      <!-- Row 4: Cheeks/Body -->
+      <rect x="0" y="48" width="132" height="12"/>
+      <!-- Row 5: Mouth/Body -->
+      <rect x="0" y="60" width="132" height="12"/>
+      <!-- Row 6: Legs Frame 2 -->
+      <rect x="24" y="72" width="24" height="12"/>
+      <rect x="48" y="72" width="36" height="12"/>
+      <rect x="84" y="72" width="24" height="12"/>
+      <!-- Row 7: Feet Frame 2 -->
+      <rect x="0" y="84" width="12" height="12"/>
+      <rect x="120" y="84" width="12" height="12"/>
+      <!-- Eyes cutout -->
+      <rect x="24" y="36" width="12" height="12" class="eyes"/>
+      <rect x="96" y="36" width="12" height="12" class="eyes"/>
+      <rect x="27" y="39" width="6" height="6" fill="#0a0a1a"/>
+      <rect x="99" y="39" width="6" height="6" fill="#0a0a1a"/>
+    </g>
+  </g>
+
+  <!-- Bottom Tag -->
+  <text x="120" y="208" text-anchor="middle" font-family="'Segoe UI', Consolas, monospace" font-size="11" font-weight="700" fill="#8892a0" letter-spacing="3">INVADER SQUAD</text>
+</svg>

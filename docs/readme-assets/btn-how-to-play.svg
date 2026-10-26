@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 38" width="170" height="38">
+  <defs>
+    <linearGradient id="btnDarkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#191938"/>
+      <stop offset="100%" stop-color="#0e0e22"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="166" height="34" rx="6" fill="url(#btnDarkGrad)" stroke="#00e5ff" stroke-width="1.2"/>
+  <!-- Gamepad D-pad icon -->
+  <path d="M25 15 L25 23 M21 19 L29 19" stroke="#00e5ff" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="34" cy="17" r="1.5" fill="#39ff14"/>
+  <circle cx="37" cy="20" r="1.5" fill="#00e5ff"/>
+  <text x="100" y="23" font-family="'Segoe UI', Consolas, sans-serif" font-size="12" font-weight="700" fill="#00e5ff" text-anchor="middle" letter-spacing="1.5">HOW TO PLAY</text>
+</svg>
